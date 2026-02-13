@@ -45,7 +45,7 @@ const MoviesPage = () => {
 
                 {/* Sidebar Filters */}
                 <aside className={`
-                    fixed inset-0 z-40 bg-dark-bg p-4 transition-transform duration-300 transform
+                    fixed inset-0 z-[60] bg-dark-bg p-4 transition-transform duration-300 transform
                     md:relative md:translate-x-0 md:w-64 md:block md:bg-transparent md:p-0
                     ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full'}
                 `}>

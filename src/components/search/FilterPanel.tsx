@@ -19,7 +19,7 @@ const FilterPanel = ({ onClose }: FilterPanelProps) => {
     const ratings = [9, 8, 7, 6, 5, 4, 3, 2, 1];
 
     return (
-        <div className="bg-dark-surface p-6 rounded-lg border border-white/5 h-full overflow-y-auto">
+        <div className="bg-dark-surface p-6 pt-10 md:pt-6 rounded-lg border border-white/5 h-full overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-display text-white">Filters</h2>
                 {onClose && (
