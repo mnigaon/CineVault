@@ -10,7 +10,7 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie }: MovieCardProps) => {
     return (
-        <Link to={`/movie/${movie.id}`}>
+        <Link to={`/movie/${movie.id}`} aria-label={`View details for ${movie.title}`}>
             <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}

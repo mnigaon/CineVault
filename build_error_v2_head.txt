@@ -1,0 +1,9 @@
+﻿
+> cinevault@0.0.0 build
+> tsc -b && vite build
+
+src/App.tsx(45,22): error TS2322: Type '{ children: Element; suppressHydrationWarning: true; }' is not assignable to type 'IntrinsicAttributes & BrowserRouterProps'.
+  Property 'suppressHydrationWarning' does not exist on type 'IntrinsicAttributes & BrowserRouterProps'.
+vite.config.ts(14,3): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, and 'test' does not exist in type 'UserConfigExport'.

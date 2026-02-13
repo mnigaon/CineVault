@@ -23,8 +23,8 @@ const FilterPanel = ({ onClose }: FilterPanelProps) => {
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-display text-white">Filters</h2>
                 {onClose && (
-                    <button onClick={onClose} className="md:hidden text-gray-400">
-                        <X size={24} />
+                    <button onClick={onClose} className="md:hidden text-gray-400" aria-label="Close filters">
+                        <X size={24} aria-hidden="true" />
                     </button>
                 )}
             </div>
@@ -35,6 +35,7 @@ const FilterPanel = ({ onClose }: FilterPanelProps) => {
                 <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
+                    aria-label="Sort movies by"
                     className="w-full bg-dark-bg text-white border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-accent-primary"
                 >
                     <option value="popularity.desc">Popularity (High to Low)</option>
@@ -54,9 +55,11 @@ const FilterPanel = ({ onClose }: FilterPanelProps) => {
                         <button
                             key={g.id}
                             onClick={() => setGenreId(genreId === g.id ? null : g.id)}
+                            aria-pressed={genreId === g.id}
+                            aria-label={`Filter by ${g.name}`}
                             className={`px-3 py-1 text-xs rounded-full border transition-colors ${genreId === g.id
-                                    ? 'bg-accent-secondary border-accent-secondary text-dark-bg font-bold'
-                                    : 'border-white/20 text-gray-300 hover:border-white/50'
+                                ? 'bg-accent-secondary border-accent-secondary text-dark-bg font-bold'
+                                : 'border-white/20 text-gray-300 hover:border-white/50'
                                 }`}
                         >
                             {g.name}
@@ -71,6 +74,7 @@ const FilterPanel = ({ onClose }: FilterPanelProps) => {
                 <select
                     value={year || ''}
                     onChange={(e) => setYear(e.target.value ? Number(e.target.value) : null)}
+                    aria-label="Filter by release year"
                     className="w-full bg-dark-bg text-white border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-accent-primary"
                 >
                     <option value="">All Years</option>
@@ -88,9 +92,11 @@ const FilterPanel = ({ onClose }: FilterPanelProps) => {
                         <button
                             key={r}
                             onClick={() => setRating(rating === r ? null : r)}
+                            aria-pressed={rating === r}
+                            aria-label={`Minimum rating ${r} and above`}
                             className={`w-8 h-8 flex items-center justify-center rounded-full border transition-colors text-sm ${rating === r
-                                    ? 'bg-accent-primary border-accent-primary text-white font-bold'
-                                    : 'border-white/20 text-gray-300 hover:border-white/50'
+                                ? 'bg-accent-primary border-accent-primary text-white font-bold'
+                                : 'border-white/20 text-gray-300 hover:border-white/50'
                                 }`}
                         >
                             {r}+

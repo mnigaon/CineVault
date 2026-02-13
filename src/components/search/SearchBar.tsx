@@ -45,6 +45,7 @@ const SearchBar = () => {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Search for movies, TV shows..."
+                    aria-label="Search movies"
                     className="w-full pl-12 pr-12 py-3 bg-white/10 border border-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:bg-white/20 transition-all backdrop-blur-md"
                 />
                 {inputValue && (

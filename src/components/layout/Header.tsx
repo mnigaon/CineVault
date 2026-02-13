@@ -9,8 +9,8 @@ const Header = () => {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-white/5">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                <Link to="/" className="flex items-center gap-2 text-primary font-display text-2xl tracking-wider text-accent-primary">
-                    <Film className="w-6 h-6" />
+                <Link to="/" className="flex items-center gap-2 text-primary font-display text-2xl tracking-wider text-accent-primary" aria-label="CineVault Home">
+                    <Film className="w-6 h-6" aria-hidden="true" />
                     <span>CINEVAULT</span>
                 </Link>
 
@@ -22,7 +22,11 @@ const Header = () => {
                         Movies
                     </NavLink>
                     {user && (
-                        <NavLink to="/watchlist" className={({ isActive }) => `text-sm font-medium transition-colors hover:text-white ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                        <NavLink
+                            to="/watchlist"
+                            className={({ isActive }) => `text-sm font-medium transition-colors hover:text-white ${isActive ? 'text-white' : 'text-gray-400'}`}
+                            aria-label="View your watchlist"
+                        >
                             Watchlist
                         </NavLink>
                     )}
