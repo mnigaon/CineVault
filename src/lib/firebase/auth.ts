@@ -4,7 +4,7 @@ import type { User } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { create } from 'zustand';
 import { useEffect } from 'react';
-import { getAnalytics, isSupported } from 'firebase/analytics';
+import { getAnalytics, isSupported, type Analytics } from 'firebase/analytics';
 
 // For now, using placeholder values. User needs to provide these.
 // In a real scenario, we would ask for these or check .env
@@ -26,7 +26,7 @@ export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
 // Initialize Analytics if supported (only in browser environment)
-export let analytics: any = null;
+export let analytics: Analytics | null = null;
 
 isSupported().then((supported) => {
     if (supported) {
