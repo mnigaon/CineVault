@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import BottomNav from './BottomNav';
+import AuthModal from './AuthModal';
 
 const MainLayout = () => {
     return (
@@ -12,6 +13,7 @@ const MainLayout = () => {
             </main>
             <Footer />
             <BottomNav />
+            <AuthModal />
         </div>
     );
 };

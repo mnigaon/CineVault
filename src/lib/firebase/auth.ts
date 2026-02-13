@@ -1,5 +1,14 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile
+} from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { create } from 'zustand';
@@ -19,40 +28,62 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-// Only initialize if config is valid to prevent crashes during initial setup
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Initialize Analytics if supported (only in browser environment)
+// Initialize Analytics if supported
 export let analytics: Analytics | null = null;
-
 isSupported().then((supported) => {
     if (supported) {
         analytics = getAnalytics(app);
     }
 });
 
-
 // Zustand store for Auth State
 interface AuthState {
     user: User | null;
     loading: boolean;
+    isAuthModalOpen: boolean;
     signInWithGoogle: () => Promise<void>;
+    signInWithEmail: (email: string, pass: string) => Promise<void>;
+    signUpWithEmail: (email: string, pass: string, name: string) => Promise<void>;
     logout: () => Promise<void>;
     setUser: (user: User | null) => void;
     setLoading: (loading: boolean) => void;
+    setAuthModalOpen: (isOpen: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
     user: null,
     loading: true,
+    isAuthModalOpen: false,
     signInWithGoogle: async () => {
         try {
             await signInWithPopup(auth, googleProvider);
+            set({ isAuthModalOpen: false });
         } catch (error) {
             console.error('Error signing in with Google', error);
+            throw error;
+        }
+    },
+    signInWithEmail: async (email, pass) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, pass);
+            set({ isAuthModalOpen: false });
+        } catch (error) {
+            console.error('Error signing in with Email', error);
+            throw error;
+        }
+    },
+    signUpWithEmail: async (email, pass, name) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+            await updateProfile(userCredential.user, { displayName: name });
+            set({ isAuthModalOpen: false });
+        } catch (error) {
+            console.error('Error signing up', error);
             throw error;
         }
     },
@@ -67,6 +98,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     },
     setUser: (user) => set({ user }),
     setLoading: (loading) => set({ loading }),
+    setAuthModalOpen: (isOpen) => set({ isAuthModalOpen: isOpen }),
 }));
 
 // Hook to initialize auth listener

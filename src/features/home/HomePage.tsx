@@ -40,18 +40,18 @@ const HomePage = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent" />
                         <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
                     </div>
-                    <div className="absolute bottom-0 left-0 p-8 md:p-16 max-w-3xl z-10">
-                        <h1 className="text-5xl md:text-7xl font-display text-white mb-4 leading-tight drop-shadow-lg">
+                    <div className="absolute bottom-0 left-0 p-6 md:p-16 max-w-3xl z-10 w-full">
+                        <h1 className="text-4xl md:text-7xl font-display text-white mb-4 leading-tight drop-shadow-lg lg:line-clamp-2">
                             {featuredMovie.title}
                         </h1>
-                        <p className="text-gray-200 text-lg line-clamp-3 mb-8 drop-shadow-md">
+                        <p className="text-gray-200 text-sm md:text-lg line-clamp-3 mb-6 md:mb-8 drop-shadow-md">
                             {featuredMovie.overview}
                         </p>
-                        <div className="flex gap-4">
-                            <Link to={`/movie/${featuredMovie.id}`} className="px-8 py-3 bg-accent-primary text-white font-bold rounded hover:bg-red-700 transition-colors shadow-lg">
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                            <Link to={`/movie/${featuredMovie.id}`} className="px-8 py-3 bg-accent-primary text-white font-bold rounded hover:bg-red-700 transition-colors shadow-lg text-center">
                                 Play Now
                             </Link>
-                            <Link to={`/movie/${featuredMovie.id}`} className="px-8 py-3 bg-gray-600/80 text-white font-bold rounded hover:bg-gray-600 transition-colors backdrop-blur-sm">
+                            <Link to={`/movie/${featuredMovie.id}`} className="px-8 py-3 bg-gray-600/80 text-white font-bold rounded hover:bg-gray-600 transition-colors backdrop-blur-sm text-center">
                                 More Info
                             </Link>
                         </div>

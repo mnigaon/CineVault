@@ -1,10 +1,9 @@
-//src/components/layout/Header.tsx
 import { Link, NavLink } from 'react-router-dom';
 import { Search, Film, LogOut, User as UserIcon } from 'lucide-react';
 import { useAuthStore } from '@/lib/firebase/auth';
 
 const Header = () => {
-    const { user, signInWithGoogle, logout } = useAuthStore();
+    const { user, logout, setAuthModalOpen } = useAuthStore();
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-md border-b border-white/5">
@@ -56,7 +55,7 @@ const Header = () => {
                         </div>
                     ) : (
                         <button
-                            onClick={() => signInWithGoogle()}
+                            onClick={() => setAuthModalOpen(true)}
                             className="px-4 py-1.5 bg-accent-primary text-white text-sm font-bold rounded hover:bg-red-700 transition-colors"
                         >
                             Sign In
